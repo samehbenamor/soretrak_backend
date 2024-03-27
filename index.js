@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cors from "cors";
 import User  from './routes/user.js';
 import Ligne from './routes/Ligne.js';
-
+import Reservation from './routes/Reservation.js';
 dotenv.config();
 
 const app = express();
@@ -31,6 +31,8 @@ app.use(cors());
 
 app.use('/user', User);
 app.use('/ligne', Ligne);
+//Reservation
+app.use('/reservation', Reservation);
 app.listen(port, () => {
   console.log(`Server running at http://${host}:${port}/`);
 });

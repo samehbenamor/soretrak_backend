@@ -24,7 +24,63 @@ const getAllLignes = async (req, res) => {
     }
 };
 
+const NumLignesParam = async (req, res) => {
+    try {
+        const { num } = req.params;
+        const lignes = await Ligne.find({ num: parseInt(num) });
+        if (!lignes || lignes.length === 0) {
+            return res.status(404).json({ error: 'No lignes found with the provided num' });
+        }
+        res.status(200).json(lignes);
+    } catch (error) {
+        console.error('Error fetching lignes by num:', error);
+        res.status(500).json({ error: 'Failed to fetch lignes by num' });
+    }
+};
 
+const getLignesByLigneName = async (req, res) => {
+    try {
+        const { ligneName } = req.body;
+        const lignes = await Ligne.find({ ligne: ligneName });
+        res.status(200).json(lignes);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch lignes by ligne name' });
+    }
+};
+
+const getLignesByNum = async (req, res) => {
+    try {
+        const lignes = await Ligne.aggregate([
+            // Group lignes by their num field
+            {
+                $group: {
+                    _id: '$num',
+                    // Include the first ligne encountered in each group
+                    ligne: { $first: '$ligne' },
+                    /*heure_départ: { $first: '$heure_départ' },
+                    heure_retour: { $first: '$heure_retour' },
+                    durée: { $first: '$durée' },
+                    tarif: { $first: '$tarif' },*/
+                },
+            },
+            // Project to rename _id to num
+            {
+                $project: {
+                    _id: 0,
+                    num: '$_id',
+                    ligne: 1,
+                    /*heure_départ: 1,
+                    heure_retour: 1,
+                    durée: 1,
+                    tarif: 1,*/
+                },
+            },
+        ]);
+        res.status(200).json(lignes);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch lignes' });
+    }
+};
 // Get a single ligne by ID
 const getLigneById = async (req, res) => {
     try {
@@ -76,4 +132,7 @@ export {
     getLigneById,
     updateLigne,
     deleteLigne,
+    getLignesByNum,
+    NumLignesParam,
+    getLignesByLigneName,
 };
