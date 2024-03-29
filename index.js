@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from "cors";
-import User  from './routes/user.js';
+import User  from './routes/User.js';
 import Ligne from './routes/Ligne.js';
 import Reservation from './routes/Reservation.js';
 dotenv.config();
