@@ -52,12 +52,12 @@ const login = async (req, res, next) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, prenom, email, password, num_telephone } = req.body;
+    const { nom, prenom, email, password, num_telephone } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const code_paiement = Math.floor(1000 + Math.random() * 9000);
 
     const newUser = new User({
-      name,
+      nom,
       prenom,
       email,
       password: hashedPassword,
@@ -76,7 +76,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.find({});
     const user_list = users.map(user => ({
       _id: user._id,
-      name: user.name,
+      nom: user.nom,
       prenom: user.prenom,
       email: user.email,
       num_telephone: user.num_telephone,
