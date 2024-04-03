@@ -13,4 +13,4 @@ const ReservationSchema = new Schema({
 });
 
 
-export default model("Reservation", ReservationSchema);;
+export default model("Reservation", ReservationSchema);

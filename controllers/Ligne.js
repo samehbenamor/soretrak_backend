@@ -116,7 +116,7 @@ const updateLigne= async (req, res) => {
 // Delete a user by ID
 const deleteLigne = async (req, res) => {
     try {
-        const deletedLigne = await User.findByIdAndDelete(req.params.id);
+        const deletedLigne = await Ligne.findByIdAndDelete(req.params.id);
         if (!deletedLigne) {
             return res.status(404).json({ error: 'Ligne not found' });
         }

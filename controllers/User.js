@@ -74,14 +74,7 @@ const createUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
-    const user_list = users.map(user => ({
-      _id: user._id,
-      nom: user.nom,
-      prenom: user.prenom,
-      email: user.email,
-      num_telephone: user.num_telephone,
-    }));
-    res.status(200).json({ list: user_list });
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
