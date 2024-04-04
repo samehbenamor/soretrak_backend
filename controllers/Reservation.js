@@ -19,13 +19,13 @@ const createReservation = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'epicfunmaker@gmail.com',
-                pass: 'drqyexoivhzhmpbu'
+                user: 'amrin0865@gmail.com',
+                pass: 'yijxnjymlnixmjew'
             }
         });
         console.log("Transporter options part is done");
         const mailOptions = {
-            from: 'epicfunmaker@gmail.com',
+            from: 'amrin0865@gmail.com',
             to: userEmail,
             subject: 'Reservation QR Code',
             text: 'Le code QR de votre réservation est joint ci-dessous.',
