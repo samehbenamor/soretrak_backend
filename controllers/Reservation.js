@@ -28,7 +28,7 @@ const createReservation = async (req, res) => {
             from: 'amrin0865@gmail.com',
             to: userEmail,
             subject: 'Reservation QR Code',
-            text: 'Le code QR de votre réservation est joint ci-dessous.',
+            text: 'Le code QR de votre réservation est joint ci-dessous. Bonne voyage.',
             attachments: [{
                 filename: 'reservation_qr_code.png',
                 content: qrCodeBuffer,
