@@ -6,23 +6,7 @@ import bcrypt from "bcrypt";
 
 dotenv.config();
 
-const MAILER_DISPLAY_NAME = process.env.MAILER_DISPLAY_NAME;
-const FROM_EMAIL = process.env.MAILER_EMAIL_ID;
-const AUTH_PASSWORD = process.env.MAILER_PASSWORD;
-const HOST = process.env.HOST;
-const PORT_SSL = process.env.PORT_SSL;
-const MAILER_SERVICE_PROVIDER = process.env.MAILER_SERVICE_PROVIDER;
 
-const smtpTransport = nodemailer.createTransport({
-  host: HOST,
-  port: PORT_SSL,
-  secure: false,
-  service: MAILER_SERVICE_PROVIDER,
-  auth: {
-    user: FROM_EMAIL,
-    pass: AUTH_PASSWORD,
-  },
-});
 
 const login = async (req, res, next) => {
   try {
@@ -94,7 +78,7 @@ const createUser = async (req, res) => {
     const CP = "Votre code de paiment est : " + code_paiement;
     const mailOptions = {
       from: "amrin0865@gmail.com",
-      to: userEmail,
+      to: email,
       subject: "Code paiment",
       text: CP,
     };
